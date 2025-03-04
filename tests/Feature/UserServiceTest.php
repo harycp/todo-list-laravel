@@ -22,4 +22,18 @@ class UserServiceTest extends TestCase
     {
         self::assertTrue(true);
     }
+
+    public function testLogin()
+    {
+        $data = [
+            "usernameOrEmail" => "haryrangers25@gmail.com",
+            "password" => "Haryyy_*"
+        ];
+
+        $this->post('/login', $data)->assertStatus(201)->assertJson([
+            "data" => [
+                "Success"
+            ]
+        ]);
+    }
 }

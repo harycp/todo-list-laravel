@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Model
+class User extends Authenticatable
 {
     protected $table = 'users';
     protected $primaryKey = 'id';
@@ -22,6 +24,17 @@ class User extends Model
         "password",
         "token"
     ];
+
+    protected static function boot():void
+    {
+        parent::boot();
+
+        static::creating(function($model){
+            if(empty($model->id)) $model->id = (string) Str::uuid();
+
+            $model->email = strtolower($model->email);
+        });
+    }
 
 
 }
