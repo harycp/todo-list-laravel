@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class UserLoginRequest extends FormRequest
 {
@@ -23,5 +24,14 @@ class UserLoginRequest extends FormRequest
             'password' => ['required', 'min:8'],
             'remember' => ['nullable', 'boolean']
         ];
+    }
+
+    protected function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
+    {
+        throw new HttpResponseException(response([
+            'errors' => [
+                'message' => $validator->getMessageBag()
+            ]
+            ], 400));
     }
 }

@@ -19,8 +19,6 @@ class UserController extends Controller
     public function login(UserLoginRequest $request):JsonResponse
     {
         try{
-            Log::info("Test Login");
-
             $credentials = $request->validated();
             $remember = $request->has('remember');
 
@@ -31,13 +29,13 @@ class UserController extends Controller
                     "Success"
                 ]
             ])->setStatusCode(201);
+
         }catch(\Exception $e) {
-            Log::info($e);
             return response()->json([
                 "data" => [
-                    "message" => $e->getMessage()
+                    "errors" => $e->getMessage()
                 ]
-            ]);
+            ])->setStatusCode(401);
         }
 
     }

@@ -36,4 +36,18 @@ class UserServiceTest extends TestCase
             ]
         ]);
     }
+
+    public function testLoginFailed()
+    {
+        $data = [
+            "usernameOrEmail" => "haryrangers2s5@gmail.com",
+            "password" => "Haryyy_*s"
+        ];
+
+        $this->post('/login', $data)->assertStatus(401)->assertJson([
+            "data" => [
+                "errors" => ""
+            ]
+        ]);
+    }
 }
