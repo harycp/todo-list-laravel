@@ -16,6 +16,11 @@ class UserController extends Controller
         $this->userServices = $userServices;
     }
 
+    public function viewLogin()
+    {
+        return view('auth.login');
+    }
+
     public function login(UserLoginRequest $request):JsonResponse
     {
         try{
