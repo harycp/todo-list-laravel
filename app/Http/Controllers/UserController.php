@@ -36,6 +36,7 @@ class UserController extends Controller
             ])->setStatusCode(201);
 
         }catch(\Exception $e) {
+            Log::info($e->getMessage());
             return response()->json([
                 "data" => [
                     "errors" => $e->getMessage()

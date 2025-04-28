@@ -22,7 +22,7 @@ class User extends Authenticatable
     
     protected $hidden = [
         "password",
-        "token"
+        "remember_token"
     ];
 
     protected static function boot():void

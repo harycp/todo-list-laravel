@@ -8,4 +8,3 @@ Route::get('/', function () {
 });
 
 Route::get('/login', [UserController::class, 'viewLogin'])->name('login.view');
-Route::post('/login', [UserController::class, 'login'])->name('login');

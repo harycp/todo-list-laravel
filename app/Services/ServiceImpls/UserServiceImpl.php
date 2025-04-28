@@ -5,6 +5,7 @@ namespace App\Services\ServiceImpls;
 use App\Services\UserServices;
 use Exception;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class UserServiceImpl implements UserServices
 {
@@ -26,6 +27,8 @@ class UserServiceImpl implements UserServices
         if(!$authorized){
             throw new Exception();
         }
+
+        Session::put('user_id', Auth::id());
 
     }
 
